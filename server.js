@@ -1,30 +1,29 @@
 require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const parser = require('body-parser');
-// const { CORS_CONFIG } = require('./utils/server/cors');
-// const { Logger } = require('./middlewares/server/logger');
-// const { RateLimiter } = require('./middlewares/server/rate-limiter');
+const server = require('express')();
 
-// Initializing app
-const app = express();
-
-// Setting port to run app
+// Setting port to run app, default to 8000
 const port = process.env.PORT || 8001;
 
+// Setting Active Version for the API Server
+const apiVersion = process.env.API_VERSION || 'v1';
+
 // Using bodyparser middleware
-app.use(parser.json());
+server.use(require('body-parser').json({limit: '50mb'}));
 
-app.use(cors());
-
-// Root URL Giving user info about the application map
-app.get('/', (req, res) => {
-  res.send('Hello, your app is up and running!');
+// Application health endpoint
+server.get('/', (req, res) => {
+  res.send('Hello, your app is up and running!')
 });
+
+// Service discovery map endpoint
+server.use('/server', require('./routes/server'));
+
+// Will ingest Multiple type of Clinical Datapoints
+server.use(`/api/${apiVersion}/clinical-data`, require('./routes/clinical-data'));
 
 // App starts from here
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+server.listen(port, () => {
+  console.log(`Server is started on port ${port}`)
 });
 
-module.exports = app;
+module.exports = server;
