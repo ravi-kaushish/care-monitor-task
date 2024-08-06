@@ -1,0 +1,10 @@
+node_modules
+*/node_modules/
+build
+temp
+.env
+docker-compose.yml
+Dockerfile
+.gitignore
+.dockerignore
+/sample_data
