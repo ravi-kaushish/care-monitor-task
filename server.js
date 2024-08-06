@@ -23,7 +23,10 @@ server.use(`/api/${apiVersion}/clinical-data`, require('./routes/clinical-data')
 
 // App starts from here
 server.listen(port, () => {
-  console.log(`Server is started on port ${port}`);
+  console.log(`---- Server is started on port ${port} ----`);
+  if(process.env.ENABLE_SCHEMA_MIGRATION){
+    require('./utils/db-migrations').RunSchemaMigrations()
+  }
 });
 
 module.exports = server;
