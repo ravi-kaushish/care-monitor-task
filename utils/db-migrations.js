@@ -27,12 +27,12 @@ exports.RunSchemaMigrations = async () => {
     {
       table_name: 'measurements',
       ddl: `CREATE TABLE measurements (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(50),
-    unit VARCHAR(10),
-    key varchar(100),
-    keywords varchar(255)
-);`,
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(50),
+        unit VARCHAR(10),
+        key varchar(100),
+        keywords varchar(255)
+      );`,
       binds: {}
     },
     {
@@ -54,14 +54,10 @@ exports.RunSchemaMigrations = async () => {
       if (!re.error) {
         console.log(`Created Table ${script.table_name}`)
       } else {
-        console.log(
-          `Error occured while executing DLL for Table ${script.table_name}, ${re.error}`
-        )
+        console.log(`Error occured while executing DLL for Table ${script.table_name}, ${re.error}`)
       }
     } else {
-      console.log(
-        `Table ${script.table_name} already exists, skipping migration.`
-      )
+      console.log(`Table ${script.table_name} already exists, skipping migration.`)
     }
   }
 }
