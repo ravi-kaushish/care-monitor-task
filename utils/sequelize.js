@@ -1,0 +1,21 @@
+const Sequelize = require('sequelize')
+
+exports.ExecuteQuery = async (query = '', bind = {}) => {
+  try {
+    const connection = new Sequelize(process.env.DATABASE_URL)
+    if (!query) {
+      return {
+        error: true,
+        message: 'No Query Provided'
+      }
+    }
+    return {
+      error: false,
+      data: await connection.query(query, { bind })
+    }
+  } catch (error) {
+    return {
+      error
+    }
+  }
+}
