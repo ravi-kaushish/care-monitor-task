@@ -1,4 +1,5 @@
 const { ExecuteQuery } = require('../utils/sequelize')
+const { aggregateHeartRateData } = require('../utils/aggregate')
 
 exports.GetClinicalData = async (req, res) => {
   let result = await ExecuteQuery('select * from temple', {})
@@ -10,7 +11,12 @@ exports.GetClinicalData = async (req, res) => {
   res.send(data)
 }
 
-exports.ProcessClinicalData = (req, res) => {
-  console.log(req.body)
-  res.send('This is where you can retrieve Clinical Data')
+exports.IngestClinicalData = async (req, res) => {
+  let aggregatedDate = await aggregateHeartRateData(req.body.clinical_data.HEART_RATE.data);
+  res.send(aggregatedDate)
+}
+
+exports.ProcessClinicalData = async (req, res) => {
+  let aggregatedDate = await aggregateHeartRateData(req.body.clinical_data.HEART_RATE.data);
+  res.send(aggregatedDate)
 }
