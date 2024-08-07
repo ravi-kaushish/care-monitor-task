@@ -16,7 +16,7 @@ exports.RunSchemaMigrations = async () => {
     {
       table_name: 'patients',
       ddl: `CREATE TABLE patients (
-        patient_id varchar(40) primary key,
+        patient_id varchar(40) unique,
         org_id varchar(40) references organisations(org_id),
         name VARCHAR(100),
         gender CHAR(1),
@@ -39,6 +39,7 @@ exports.RunSchemaMigrations = async () => {
       table_name: 'metrics',
       ddl: `CREATE TABLE metrics (
         id SERIAL primary key,
+        patient_id varchar(40) references patients(patient_id),
         measurement_id int references measurements(id),
         value varchar(20),
         timestamp timestamptz not null default NOW()
@@ -191,10 +192,14 @@ exports.RunSchemaMigrations = async () => {
     }else if(script.dml){
       let re = await ExecuteQuery(script.dml, script.binds)
       if (!re.error) {
-        console.log(`Script ${script.dml} was executed successfully.`)
+        console.log(`Script executed successfully.`)
       } else {
         console.log(`Error occured while executing DML ${script.table_name}, ${re.error}`)
       }
     }
   }
+}
+
+exports.GetMeasurements = async () => {
+  return await ExecuteQuery(`SELECT * FROM measurements;`)
 }

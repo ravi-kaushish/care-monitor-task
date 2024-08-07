@@ -2,7 +2,6 @@ const { ExecuteQuery } = require('./sequelize')
 
 exports.SaveMetrics = async (patient_id, measurement, metrics) => {
   for (let metric of metrics) {
-    console.log(metric)
     await ExecuteQuery(
       `INSERT INTO metrics(patient_id, measurement_id, value, timestamp) VALUES ($patient_id, $measurement_id, $value, $timestamp)`,
       {

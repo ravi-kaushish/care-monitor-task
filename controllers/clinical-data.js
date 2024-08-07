@@ -1,4 +1,5 @@
-const { GetMeasurements, AggregateHeartRateData } = require('../utils/aggregate')
+const { AggregateHeartRateData } = require('../utils/aggregate')
+const { GetMeasurements } = require('../utils/db-migrations')
 const { SaveMetrics } = require('../utils/ingest')
 
 exports.IngestClinicalData = async (req, res) => {

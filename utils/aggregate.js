@@ -1,5 +1,7 @@
+const { ExecuteQuery } = require("./sequelize");
+
 // Utility for aggregating Heart Rate Data
-exports.aggregateHeartRateData = async (heartRateData) => {
+exports.AggregateHeartRateData = async (heartRateData) => {
   // Do any pre-processing of data, like filtering null value etc
 
   // Sort the data by on_date
