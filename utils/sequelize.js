@@ -15,12 +15,6 @@ exports.ExecuteQuery = async (query = '', bind = {}) => {
       connection = await new Sequelize(process.env.DATABASE_URL, {
         logging: process.env.DATABASE_LOGGING === "true" ? true : false
       })
-
-      // Refresh connections every 1 hour
-      setInterval(() => {
-        connection = null
-        console.log(`Refreshing database connection...`)
-      }, (process.env.DATABASE_CONNECTION_REFRESH_TIME || 1) * 60 * 60 * 1000)
     }
 
     return {
@@ -33,3 +27,9 @@ exports.ExecuteQuery = async (query = '', bind = {}) => {
     }
   }
 }
+
+// Refresh connections every 1 hour
+setInterval(() => {
+  connection = null
+  console.log(`Refreshing database connection...`)
+}, (process.env.DATABASE_CONNECTION_REFRESH_TIME || 1) * 60 * 60 * 1000)
