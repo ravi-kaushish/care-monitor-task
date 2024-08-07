@@ -7,7 +7,7 @@ router.post("/composite/ingest", IngestClinicalData);
 // Endpoint to Process and Save Data
 router.post("/composite/process", ProcessClinicalData);
 
-//  Create Multiple Implementations of API for each type of health data
+//  Create Multiple Implementations of these APIs to handle speceific type of health data
 // router.post("/heart-rate/ingest", IngestHeartRateData);
 // router.post("/heart-rate/process", ProcessHeartRateData);
 
