@@ -16,7 +16,7 @@ server.get('/', (req, res) => {
 });
 
 // Service discovery map endpoint
-server.use('/server', require('./routes/server'));
+server.use(`/api/${apiVersion}/server`, require('./routes/server'));
 
 // Will ingest Multiple type of Clinical Datapoints
 server.use(`/api/${apiVersion}/clinical-data`, require('./routes/clinical-data'));

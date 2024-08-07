@@ -43,11 +43,101 @@ exports.GetServerUsage = () => {
 
 exports.GetServerEndpoints = () => {
   return [{
-      url: "/api/${activeApiVersion}/clinical-data/heartrate/process",
-      method: "GET",
-      name: "",
-      description: "",
-      schema: ""
+      url: "/api/{{activeApiVersion}}/clinical-data/composite/ingest",
+      method: "POST",
+      description: "Is used to save/post data to the server, without having to wait for the processed response. In Ideal case the Processing should run later on the ingested data.",
+      schema: {
+        "clinical_data": {
+           "HEART_RATE": {
+              "uom": "beats/min",
+              "data": [
+                 {
+                    "on_date": "2020-10-06T06:48:17.503000Z",
+                    "measurement": "111"
+                 }
+              ],
+              "name": "Heart Rate"
+           },
+           "WEIGHT": {
+              "uom": "Kg",
+              "name": "Weight"
+           },
+           "BLOOD_GLUCOSE_LEVELS": {
+              "uom": "mmol/L",
+              "name": "Blood Glucose"
+           },
+           "HEIGHT": {
+              "uom": "cm",
+              "name": "Height"
+           },
+           "BP": {
+              "uom": "mmHg",
+              "name": "Blood Pressure"
+           },
+           "STEPS": {
+              "uom": "",
+              "data": [
+                 {
+                    "on_date": "2020-10-05T13:00:00.000000Z",
+                    "measurement": "11031"
+                 }
+              ],
+              "name": "Steps"
+           }
+        },
+        "patient_id": "gk6dhgh-9a60-4980-bb8b-787bf82689d7",
+        "from_healthkit_sync": true,
+        "orgId": "8gj4djk6s-a5ad-444b-b58c-358dcbd72dc3",
+        "timestamp": "2020-10-09T05:36:31.381Z"
+     }
+    },{
+      url: "/api/{{activeApiVersion}}/clinical-data/composite/process",
+      method: "POST",
+      description: "Is used to process data to the server, without having to wait for the server to save the data. The server will process the data saving asynchronously after generating and sending the desired response to the client.",
+      schema: {
+        "clinical_data": {
+           "HEART_RATE": {
+              "uom": "beats/min",
+              "data": [
+                 {
+                    "on_date": "2020-10-06T06:48:17.503000Z",
+                    "measurement": "111"
+                 }
+              ],
+              "name": "Heart Rate"
+           },
+           "WEIGHT": {
+              "uom": "Kg",
+              "name": "Weight"
+           },
+           "BLOOD_GLUCOSE_LEVELS": {
+              "uom": "mmol/L",
+              "name": "Blood Glucose"
+           },
+           "HEIGHT": {
+              "uom": "cm",
+              "name": "Height"
+           },
+           "BP": {
+              "uom": "mmHg",
+              "name": "Blood Pressure"
+           },
+           "STEPS": {
+              "uom": "",
+              "data": [
+                 {
+                    "on_date": "2020-10-05T13:00:00.000000Z",
+                    "measurement": "11031"
+                 }
+              ],
+              "name": "Steps"
+           }
+        },
+        "patient_id": "gk6dhgh-9a60-4980-bb8b-787bf82689d7",
+        "from_healthkit_sync": true,
+        "orgId": "8gj4djk6s-a5ad-444b-b58c-358dcbd72dc3",
+        "timestamp": "2020-10-09T05:36:31.381Z"
+     }
     }
   ]
 }
