@@ -2,7 +2,7 @@ require('dotenv').config();
 const server = require('express')();
 
 // Setting port to run app, default to 8000
-const port = process.env.PORT || 8001;
+const port = process.env.PORT || 8000;
 
 // Setting Active Version for the API Server
 const apiVersion = process.env.API_VERSION || 'v1';

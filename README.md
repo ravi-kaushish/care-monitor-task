@@ -56,10 +56,10 @@ The application can be configured using the following options:
 ## API Endpoints Definitions
 
 ```
-http://localhost:8001/api/v1/server/health GET 
-http://localhost:8001/api/v1/server/map GET
-http://localhost:8001/api/v1/clinical-data/composite/ingest POST
-http://localhost:8001/api/v1/clinical-data/composite/process POST
+http://localhost:8000/api/v1/server/health GET 
+http://localhost:8000/api/v1/server/map GET
+http://localhost:8000/api/v1/clinical-data/composite/ingest POST
+http://localhost:8000/api/v1/clinical-data/composite/process POST
 ```
 
 ## Database Schema
